@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## LOCAL BASH SETTINGS ##
- export profileDir="$HOME/.skinforhair_settings"
+ export profileDir="$HOME/.jejackso_settings"
 
 #Grab variables
  #export pVAR=$profileDir/var
@@ -9,23 +9,20 @@
  export pBIN=$profileDir/bin
  export pLIB=$profileDir/lib
  #active should be a symlink to the local machine
- export lBIN=$profileDir/bin/active
+ export lBIN=$profileDir/bin/ihc
  export pENV=$profileDir/env
  
 #add Aliases
- export pALS=$profileDir/aliases/global
- #active should be a symlink to the local machine
- export lALS=$profileDir/aliases/active
-  for f in $pALS/*;do if [ ! -d $f ]; then source $f;fi;done
-  for f in $lALS/*;do if [ ! -d $f ]; then source $f;fi;done
-
-#Run custom login scripts
- if [ -d "$pENV/active/startup_scripts" ]; then
-   for f in $pENV/active/startup_scripts/*;do if [ ! -d $f ]; then `$f`;fi;done
- fi
+ export pALS=$profileDir/aliases
+ for f in $pALS/*;do if [ ! -d $f ]; then source $f;fi;done
 
 #set up color command prompt
  source $pENV/color_command_prompt
  
  #set PATH
  PATH=$PATH:$lBIN:$pBIN/global:$pBIN/networking:$pBIN/password
+
+#Run custom login scripts
+ if [ -d "$pENV/active/startup_scripts" ]; then
+   for f in $pENV/startup_scripts/*;do if [ ! -d $f ]; then if [ "$f" == "$(hostname)" ]; then `$f` ;fi;fi;done
+ fi
