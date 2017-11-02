@@ -12,3 +12,6 @@ MostRecentFile=$(find $DT -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -
 cd $MostRecentFile
 } #current
 
+function statusreport(){
+ find $HOME/workshop/DailyTasks -type f -mtime 7
+} #statusreport
